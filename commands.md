@@ -1,0 +1,83 @@
+- `clear` : vyčistí obrazovku
+- `ls -l` : výpis adresářů
+- `mkdir aaa` : vytvoření adresáře s názem aaa
+- `touch aaa` : vytvoří soubor s názvem aaa, pokud tento soubor již existuje, updatuje časovou známku
+- `nano` : textový editor
+- `cat aaa` : vypíše obsah souboru
+- `cat aaa -n` : vypíše obsah souboru s čísly řádků
+- `pwd` : print working directory (vypíše cestu do současného umístění v adresářovém stromu)
+- `man příkaz` : manuál příkazu
+- `cp aaa bbb` : zkopíruje obsah souboru aaa do souboru bbb
+- `cd ..` : vrátíme se o adresář zpět
+- `mv aaa bbb` : přejmenuje soubor aaa na bbb
+- `alias ls='ls -al'` : přejmenování dlouhého příkazu na kratší např.
+- `ALT + F1/2/3/4/5...` : přepnutí na jinou virtuální konzoli
+- `loadkeys us/cz` : změna jazyka klávesnice
+- `jobs` : vypsání úloh
+- `ps aux` : vypsání procesů
+- `top` : vypsání procesů (lepší než ps aux)
+- Pokud napíšeme za příkaz pro spuštění procesu `&`, spustíme ho na pozadí
+- `CTRL + C` : ukončení procesu
+- `CTRL + Z` : pozastavení procesu
+- `fg %1` : tu 1 zjistím pomocí jobs : přenést na popředí
+- `bg %1` : přenést úlohu/proces do pozadí, můžeme použít když jsme pozastavili úlohu použitím `CTRL + Z`
+- `top` pak zjistit PID a pak `kill <PID>` : zabití procesu
+- `top` a pak sloupec NI : priority, -20 je nejvyšší, +19 nejnižší
+- `nice` : nastavení priority
+- `renice <priorita (-20 až 19)> <PID>` : změna priority
+- `ls -l` : použitím tohoto příkazu zjistíme práva r read w write x execute/open, první část je pro vlastníka, druhá pro skupinu, třetí pro ostatní, pokud je na začátku d, je to directory
+- `chmod <práva> <jmeno souboru>` : nastavení práv např. ~~chmod u=wrx,g=wx,o=wx aaa~~ `chmod u+wrx,g+wx,o+wx aaa`
+- Oktalový způsob nastavení práv : `rw-r--r-- == 110 100 100` (binární zápis) --> `644` (octa zápis) takže napíšeme `chmod 644 aaa`, max je `777` všechna práva
+- `cat /etc/passwd` : výpis skupin
+- `0` skupina root, `1000` skupina student
+- `chgrp 1000/student aaa` : změna skupiny
+- `chown root aaa` : změní vlastníka souboru aaa na root
+- `newgrp` : nastavení uživatele, který není ve skupině např. `newgrp developers` přepne aktuálního uživatele do skupiny developers
+- `ln aaa pevny_odkaz` : vytvoření pevného odkazu na soubor aaa
+- `<` : soubor přepíše
+- `<<` : přidá text do souboru (nepřepíše ho celý)
+- `ln -s aaa symbol_odkaz` : vytvoření symbolického odkazu na soubor aaa
+- `pico` : editor souborů, buď vytvořit soubor pomocí `touch` a pak dát `pico soubor` nebo prvně `pico` a pak v tom začít psát a pak uložit
+- Pokud chceme soubor setřídit a očíslovat až je setřízený, tak buď dvojkrokově: `cat soubor_jmenaM | sort >> setrizeny`, ten setrizeny pak vypsat pomocí `cat setrizeny -n` NEBO jednokrokově: `sort soubor_jmenaM | nl`
+- `cat setrizeny | head -2` : vypíše první dva řádky souboru
+- `sort aaa | uniq > v1` : do souboru v1 vepíše neduplikátní seřazené řádky souboru aaa
+- `cat v1 -n > v2` : očíslovaný soubor v1 dá do nového souboru v2
+- `uniq aaa bbb` : do souboru bbb vepíše unikátní řádky ze souboru aaa
+- `cat aaa | tail -2` : vypíše poslední dva řádky ze souboru aaa
+- `cat aaa -n | tail -2` : vypíše očíslované poslední dva řádky ze souboru aaa
+- `diff aaa bbb` : zobrazí rozdíly mezi soubory aaa, bbb
+- `grep Josef aaa -n` : najítí řetězce 'Josef' v souboru aaa
+- `find -name 'aaa*'` : najde soubory/adresáře začínající na znaky aaa
+- `gzip aaa`
+- `gunzip aaa`
+- `tar` : zipování složek
+- `bzip2 aaa`
+- `bunzip2 aaa`
+- `du /etc -h` : zobrazí velikost adresáře /etc
+- `du -h` : ukáže velikost aktuálního adresáře
+- `du` : využití disku - velikost složek
+- `df` : volné místo na disku
+- `-h` znamená, že se vypíší jednotky
+- `free` : volná a využívaná paměť
+- `uptime` : informace, jak dlouho běží systém
+- `whoami` : jak jsem přihlášen
+- `who am i` : podrobnější informace
+- `w` : kdo je přihlášen a co dělá
+- `who` : kdo je přihlášený
+- `users` : vypíše jména uživatelů, kteří jsou přihlášeni
+- `last` : seznam posledních přihlášení
+- `id` : info o uživateli
+- `which` : vyhledání příkazu, v které je složce
+- `whatis` : vyhledání nápovědy k příkazu
+- `a) sh skript` : spuštění způsob 1.
+- `b) skript` : nastavit právo spustit - spuštění způsob 2.
+- `echo` : výpis na konzoli
+- `#` : zapoznámkování řádku
+- `!/bin/bash` : barevné zvýraznění kódu
+- `$#` : vypíše počet argumentů
+- `$0` : vypíše název příkazu
+- `$1-9` : vypíše hodnotu parametru
+- `$*` : vypíše argumenty jako jedno slovo
+- `$@` : vypíše argumenty jako posloupnost
+- `$$` : aktuální proces
+- `$?` : návratový kód posledního příkazu
