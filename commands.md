@@ -1,3 +1,49 @@
+- `přihlášení  root (opsys)`
+- `přihlášení  student (opsys)`
+- `ALT + F2` (switch na druhou konzoli)
+- 
+- `man loadkeys > napoveda` : vytvoří se soubor napoveda a do souboru napoveda se vepíše manuál příkazu loadkeys
+- `touch soubor1` : vytvoří se soubor s názvem soubor1
+- `mkdir slozka` : vytvoří se složka s nazvem slozka
+- `cp soubor1 slozka` : zkopíruje se soubor1 do složky slozka
+- `touch soubor2` : vytvoří soubor s názvem soubor2
+- `mv soubor2 slozka` : přemístí soubor2 do složky slozka
+- `cd slozka`
+- `rm soubor1` : smaže soubor s názem soubor1
+- `rm soubor2`
+- `rmdir slozka` : smaže složku slozka
+-
+- `nano soubor`
+- 
+- `A`
+- `B`
+- `C`
+- `D`
+- 
+- `cat soubor -n` : očíslovaný vypíše
+- `cat soubor | sort NEBO sort soubor` : seřadí
+- `sort soubor > souborSort` vpíše seřazený soubor do souborSort
+- `cat souborSort -n` vypíše očíslovaný seřazený soubor (očíslovaný souborSort)
+- nebo jednokrokově můžem `sort soubor | nl` : vypíše seřazený očíslovaný soubor
+- `cpuls 20` : spustí cpuls na popředí na 20 sekund
+- `cpuls 20 &` spustí cpuls na pozadí na 20 sekund
+- `fg 1` přenese úlohu do popředí tu 1 zjistím pomocí jobs je to v té [] závorce
+- `kill <PID>` např `kill 1483`
+- `renice +5 1316` (může udělat student) (toto je snížení priority)
+- `renice -2 1316` (nemůže udělat student, jen root) (toto je zvýšení proirity)
+- `chmod u=rw,g=r,o= soubor` nebo `chmod 640` př. nastavení práv pro soubor s názvem soubor
+- `nano script`
+- do toho napsat `echo pocet parametru $#`
+- `CTRL + O`
+- `CTRL + X`
+- `sh script` -> pocet parametru 0
+- `sh script a b c` -> pocet parametru 3
+- v linuxu je `1 false (chyba)` a `0 true (není chyba)`
+- je 15:29 a chceme aby se každý den v 15:30 vykonal následující příkaz
+- `30 15 * * * last >> vypisusers` : vepíše přihlášené uživatele do souboru vypisusers každý den v 15:30 
+
+***
+
 - `clear` : vyčistí obrazovku
 - `ls -l` : výpis adresářů
 - `mkdir aaa` : vytvoření adresáře s názem aaa
@@ -26,7 +72,7 @@
 - `nice` : nastavení priority
 - `renice <priorita (-20 až 19)> <PID>` : změna priority
 - `ls -l` : použitím tohoto příkazu zjistíme práva r read w write x execute/open, první část je pro vlastníka, druhá pro skupinu, třetí pro ostatní, pokud je na začátku d, je to directory
-- `chmod <práva> <jmeno souboru>` : nastavení práv např. ~~chmod u=wrx,g=wx,o=wx aaa~~ `chmod u+wrx,g+wx,o+wx aaa`
+- `chmod <práva> <jmeno souboru>` : nastavení práv např. `chmod u=wrx,g=wx,o=wx aaa` nebo `chmod u+wrx,g+wx,o+wx aaa`
 - Oktalový způsob nastavení práv : `rw-r--r-- == 110 100 100` (binární zápis) --> `644` (octa zápis) takže napíšeme `chmod 644 aaa`, max je `777` všechna práva
 - `cat /etc/passwd` : výpis skupin
 - `0` skupina root, `1000` skupina student
@@ -50,9 +96,27 @@
 - `find -name 'aaa*'` : najde soubory/adresáře začínající na znaky aaa
 - `gzip aaa`
 - `gunzip aaa`
-- `tar` : zipování složek
+- `tar` : zipování složek `tar -[c, x, t] [z, j]f archive-name.tar[.gz/bz2] directory-to-zip`
+- * -c: create a new archive.
+- * -x: extract files from an archive.
+- * -t: list the contents of an archive.
+- * -v: verbose output (list processed files).
+- * -f: specify the filename of the archive.
+- * -z: use gzip for compression (.tar.gz or .tgz files).
+- * -j: use bzip2 for compression (.tar.bz2 files).
+- např: `tar -czvf myarchive.tar.gz mydir` to compress a directory (mydir) into a .tar.gz file
+- * -c: create the archive.
+- * -z: use gzip for compression.
+- * -v: verbose output (shows file names).
+- * -f: specify the output file (myarchive.tar.gz).
+- extrahování: `tar -xzvf myarchive.tar.gz`
+- * -x: extract files.
+- * -z: handle gzip compression.
+- * -v: verbose output.
+- * -f: specify the archive file.
 - `bzip2 aaa`
 - `bunzip2 aaa`
+- `date` : vypíše aktuální datum
 - `du /etc -h` : zobrazí velikost adresáře /etc
 - `du -h` : ukáže velikost aktuálního adresáře
 - `du` : využití disku - velikost složek
@@ -62,13 +126,13 @@
 - `uptime` : informace, jak dlouho běží systém
 - `whoami` : jak jsem přihlášen
 - `who am i` : podrobnější informace
-- `w` : kdo je přihlášen a co dělá
+- `w` : kdo je přihlášen a co dělá - podrobný výpis
 - `who` : kdo je přihlášený
 - `users` : vypíše jména uživatelů, kteří jsou přihlášeni
-- `last` : seznam posledních přihlášení
+- `last` : seznam posledních přihlášení do systému
 - `id` : info o uživateli
-- `which` : vyhledání příkazu, v které je složce
-- `whatis` : vyhledání nápovědy k příkazu
+- `which` : vyhledání příkazu, v které je složce např. `which ls` vypíše /usr/bin/ls
+- `whatis` : vyhledání nápovědy k příkazu např `whatis ls`
 - `a) sh skript` : spuštění způsob 1.
 - `b) skript` : nastavit právo spustit - spuštění způsob 2.
 - `echo` : výpis na konzoli
@@ -81,3 +145,12 @@
 - `$@` : vypíše argumenty jako posloupnost
 - `$$` : aktuální proces
 - `$?` : návratový kód posledního příkazu
+- `set` : přiřazení hodnoty do argumentu
+- `test nebo []` : výsledek je 0 (pravda) nebo 1 (nepravda)
+- `-d složka` existuje a je to adresář
+- `-e soubor` existuje
+- `soubor1 -nt soubor2` : pravda, když je soubor1 novější než soubor2
+- `soubor1 -ot soubor2` : pravda, když je soubor1 starší než soubor2
+- `shift`: posunutí pořadí parametrů
+- `-eq` porovnání čísel
+- `=` porovnání stringů
