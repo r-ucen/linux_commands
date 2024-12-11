@@ -154,3 +154,92 @@
 - `shift`: posunutí pořadí parametrů
 - `-eq` porovnání čísel
 - `=` porovnání stringů
+
+
+Test existence souboru:  
+
+if test -e $1 (NEBO POUŽÍT if [ -e $1 ])  
+then  
+echo existuje  
+else  
+echo neexistuje  
+fi  
+  
+  
+Test dostatek parametrů  
+if [ $# -eq 3 ]  
+then  
+echo pocet parametru je 3  
+case $3 in  
+    -c) echo Parametr je -c; cp $1 $2 ;;  
+    -r) echo Parametr je -r; rm $1 ;;  
+    -k) echo Parametr je -k; gzip $1 ;;  
+    *) Byl zadan neznamy parametr ;;  
+esac  
+else  
+echo Pocet parametru neni 3  
+fi  
+  
+  
+### WHILE   
+  
+echo $  
+while [ $ = stop ]  
+do  
+    echo$  
+    shift  
+done  
+  
+### UNTIL  
+until [ $ = stop ]    
+do  
+    echo $1  
+    shift  
+if [ $# -eq 0]  
+then  
+break  
+fi  
+done  
+
+### FOR  
+for i in 1 3 5 7  
+do  
+    touch soubor$i  
+echo Byl vytvořen soubor$i  
+done  
+  
+###  
+
+trap 'echo zmackli jste CTRL + C; exit 1' 2  
+while true  
+do  
+    echo Program bezi...  
+    sleep 1  
+done  
+  
+###  
+  
+echo -n Zadejte nějake čislo  
+read cislo  
+echo zadali jste $cislo  
+  
+### Plánování úloh
+
+`crontab -e` : editace naplánovaných úloh  
+`MIN HOUR DAY MONTH DAYOFWEEK  COMMAND`  
+PŘ:  
+`37 12 * * * date`  
+`0 23-7/2,8 * * * date`  
+`0 11 4 * mon-wed date`  
+DAYOFWEEK: 0-Neděle, 6-Sobota  
+`crontab -l` : výpis naplánovaných úloh
+
+### Práce s uživatelskými účty  
+`adduser "username"` : přidá uživatele a doptá se na další informace  
+`useradd test_user` : přidá uživatele
+`useradd -d /home/test_user test_user` - nastaví domovský adresář  
+`useradd -u 1234 test_user` : přidá nový účet test_user s user ID 1234  
+`useradd -g 1000 test_user` : přidá nový účet test_user a nastaví mu skupinu 1000  
+`useradd -M test_user` : přidá uživatele test_user který nemá domovský adresář  
+`useradd -e 2024-05-30 test_user` : přidá učet s datem platnosti
+
